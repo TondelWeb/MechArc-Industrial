@@ -1,0 +1,1589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MechArc Industrial LLC — Industrial Repair & Manufacturing</title>
+  <meta name="description" content="MechArc Industrial LLC delivers expert industrial repair and custom manufacturing solutions with precision, speed, and reliability." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ── Reset & Base ─────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black:     #0D0D0D;
+      --dark:      #111111;
+      --steel:     #2A2A2A;
+      --steel2:    #1A1A1A;
+      --orange:    #FF6A00;
+      --orange2:   #E05A00;
+      --white:     #FFFFFF;
+      --grey:      #888888;
+      --grey-mid:  #AAAAAA;
+      --font-head: 'Barlow Condensed', sans-serif;
+      --font-body: 'Inter', sans-serif;
+      --ease:      0.28s cubic-bezier(0.4, 0, 0.2, 1);
+      --radius:    3px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--black);
+      color: var(--white);
+      font-family: var(--font-body);
+      font-size: 16px;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    img { max-width: 100%; display: block; }
+    a { text-decoration: none; color: inherit; }
+    ul { list-style: none; }
+
+    .container {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 0 28px;
+    }
+
+    section { position: relative; }
+
+    /* Global texture */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,106,0,0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,106,0,0.025) 1px, transparent 1px);
+      background-size: 44px 44px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ── Scroll Animations ────────────────────────────────── */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+    .fade-left {
+      opacity: 0;
+      transform: translateX(-36px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+    .fade-left.visible { opacity: 1; transform: translateX(0); }
+
+    .fade-right {
+      opacity: 0;
+      transform: translateX(36px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+    .fade-right.visible { opacity: 1; transform: translateX(0); }
+
+    /* ── Section Header Shared ────────────────────────────── */
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--font-head);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin-bottom: 14px;
+    }
+    .eyebrow::before {
+      content: '';
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--orange);
+      flex-shrink: 0;
+    }
+
+    .section-title {
+      font-family: var(--font-head);
+      font-size: clamp(2.4rem, 4.5vw, 3.6rem);
+      font-weight: 900;
+      text-transform: uppercase;
+      line-height: 1;
+      letter-spacing: 0.01em;
+      margin-bottom: 16px;
+    }
+
+    .section-sub {
+      font-size: 0.97rem;
+      color: var(--grey-mid);
+      max-width: 500px;
+      margin-bottom: 56px;
+      line-height: 1.75;
+    }
+
+    /* ── Navbar ───────────────────────────────────────────── */
+    #navbar {
+      position: fixed;
+      inset: 0 0 auto 0;
+      z-index: 1000;
+      height: 70px;
+      display: flex;
+      align-items: center;
+      background: rgba(13,13,13,0.88);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(255,106,0,0.1);
+      transition: background var(--ease), box-shadow var(--ease);
+    }
+    #navbar.scrolled {
+      background: rgba(11,11,11,0.97);
+      box-shadow: 0 2px 28px rgba(0,0,0,0.6);
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+    }
+
+    .nav-logo {
+      display: flex;
+      flex-direction: column;
+      font-family: var(--font-head);
+      font-size: 1.65rem;
+      font-weight: 900;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      line-height: 1;
+      user-select: none;
+    }
+    .nav-logo .logo-main { color: var(--white); }
+    .nav-logo .logo-main em { color: var(--orange); font-style: normal; }
+    .nav-logo .logo-sub {
+      font-size: 0.5rem;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      color: rgba(255,106,0,0.75);
+      margin-top: 2px;
+      text-transform: uppercase;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
+    .nav-links a {
+      font-family: var(--font-head);
+      font-size: 0.95rem;
+      font-weight: 600;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: #BBBBBB;
+      transition: color var(--ease);
+      position: relative;
+      padding-bottom: 2px;
+    }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--orange);
+      transition: width var(--ease);
+      border-radius: 1px;
+    }
+    .nav-links a:hover,
+    .nav-links a.active { color: var(--white); }
+    .nav-links a:hover::after,
+    .nav-links a.active::after { width: 100%; }
+
+    .nav-cta {
+      background: var(--orange) !important;
+      color: var(--white) !important;
+      font-family: var(--font-head);
+      font-size: 0.88rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 9px 20px;
+      border-radius: var(--radius);
+      white-space: nowrap;
+      transition: background var(--ease), transform var(--ease), box-shadow var(--ease) !important;
+    }
+    .nav-cta::after { display: none !important; }
+    .nav-cta:hover {
+      background: var(--orange2) !important;
+      transform: translateY(-2px);
+      box-shadow: 0 5px 18px rgba(255,106,0,0.4) !important;
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      width: 34px;
+      height: 34px;
+      background: none;
+      border: none;
+      padding: 4px;
+      justify-content: center;
+    }
+    .hamburger span {
+      display: block;
+      height: 2px;
+      background: var(--white);
+      border-radius: 2px;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+      width: 100%;
+    }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    .mobile-menu {
+      position: fixed;
+      top: 70px;
+      left: 0;
+      right: 0;
+      background: rgba(11,11,11,0.98);
+      border-bottom: 2px solid var(--orange);
+      flex-direction: column;
+      padding: 20px 28px 28px;
+      gap: 4px;
+      z-index: 999;
+      display: none;
+      backdrop-filter: blur(12px);
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      font-family: var(--font-head);
+      font-size: 1.35rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #BBBBBB;
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      transition: color var(--ease), padding-left var(--ease);
+    }
+    .mobile-menu a:last-of-type { border-bottom: none; }
+    .mobile-menu a:hover { color: var(--orange); padding-left: 6px; }
+    .mobile-menu .nav-cta {
+      margin-top: 12px;
+      text-align: center;
+      padding: 14px !important;
+      display: block;
+    }
+
+    /* ── Hero ─────────────────────────────────────────────── */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      background: var(--black);
+      padding-top: 70px;
+    }
+
+    .hero-grid {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+    .hero-grid::before {
+      content: '';
+      position: absolute;
+      inset: -50%;
+      background-image:
+        linear-gradient(rgba(255,106,0,0.065) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,106,0,0.065) 1px, transparent 1px);
+      background-size: 64px 64px;
+      animation: gridDrift 24s linear infinite;
+    }
+    @keyframes gridDrift {
+      0%   { transform: translate(0, 0) rotate(0deg); }
+      100% { transform: translate(64px, 64px) rotate(0deg); }
+    }
+    .hero-grid::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 70% 65% at 65% 45%, rgba(255,106,0,0.07) 0%, transparent 65%),
+        radial-gradient(ellipse 40% 50% at 10% 90%, rgba(255,106,0,0.04) 0%, transparent 60%),
+        linear-gradient(to bottom, transparent 55%, var(--black) 100%);
+    }
+
+    .particle {
+      position: absolute;
+      border-radius: 50%;
+      background: var(--orange);
+      opacity: 0;
+      animation: rise var(--dur, 9s) var(--delay, 0s) infinite ease-in-out;
+    }
+    @keyframes rise {
+      0%   { opacity: 0; transform: translateY(0) scale(1); }
+      15%  { opacity: 0.55; }
+      80%  { opacity: 0.1; }
+      100% { opacity: 0; transform: translateY(-130px) scale(0.2); }
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 800px;
+      padding: 60px 0 80px;
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--font-head);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin-bottom: 22px;
+    }
+    .hero-eyebrow::before {
+      content: '';
+      display: block;
+      width: 28px;
+      height: 2px;
+      background: var(--orange);
+      flex-shrink: 0;
+    }
+
+    .hero-title {
+      font-family: var(--font-head);
+      font-size: clamp(3.4rem, 7.5vw, 6.2rem);
+      font-weight: 900;
+      text-transform: uppercase;
+      line-height: 0.93;
+      letter-spacing: -0.01em;
+      margin-bottom: 30px;
+    }
+    .hero-title .accent { color: var(--orange); }
+    .hero-title .dim { color: rgba(255,255,255,0.45); }
+
+    .hero-sub {
+      font-size: 1.1rem;
+      color: var(--grey-mid);
+      max-width: 540px;
+      margin-bottom: 48px;
+      line-height: 1.75;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      background: var(--orange);
+      color: var(--white);
+      font-family: var(--font-head);
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 15px 30px;
+      border-radius: var(--radius);
+      border: 2px solid var(--orange);
+      cursor: pointer;
+      transition: background var(--ease), transform var(--ease), box-shadow var(--ease), border-color var(--ease);
+    }
+    .btn-primary:hover {
+      background: var(--orange2);
+      border-color: var(--orange2);
+      transform: translateY(-3px);
+      box-shadow: 0 12px 36px rgba(255,106,0,0.42);
+    }
+    .btn-primary svg { flex-shrink: 0; }
+
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      background: transparent;
+      color: var(--white);
+      font-family: var(--font-head);
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 15px 30px;
+      border-radius: var(--radius);
+      border: 2px solid rgba(255,255,255,0.22);
+      cursor: pointer;
+      transition: border-color var(--ease), background var(--ease), transform var(--ease);
+    }
+    .btn-ghost:hover {
+      border-color: rgba(255,255,255,0.7);
+      background: rgba(255,255,255,0.05);
+      transform: translateY(-3px);
+    }
+
+    .scroll-cue {
+      position: absolute;
+      bottom: 32px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 7px;
+      z-index: 2;
+      opacity: 0.5;
+    }
+    .scroll-cue span {
+      font-family: var(--font-head);
+      font-size: 0.65rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--grey);
+    }
+    .scroll-mouse {
+      width: 22px;
+      height: 36px;
+      border: 1.5px solid rgba(255,255,255,0.25);
+      border-radius: 11px;
+      position: relative;
+    }
+    .scroll-mouse::before {
+      content: '';
+      position: absolute;
+      top: 5px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 3px;
+      height: 7px;
+      background: var(--orange);
+      border-radius: 2px;
+      animation: bounce 2.2s infinite ease-in-out;
+    }
+    @keyframes bounce {
+      0%, 100% { top: 5px; opacity: 1; }
+      65%       { top: 18px; opacity: 0; }
+    }
+
+    /* ── Stats Bar ────────────────────────────────────────── */
+    #stats {
+      background: var(--steel2);
+      border-top: 1px solid rgba(255,106,0,0.18);
+      border-bottom: 1px solid rgba(255,106,0,0.18);
+      padding: 0;
+      position: relative;
+      z-index: 1;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .stat-item {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 28px 32px;
+      border-right: 1px solid rgba(255,255,255,0.06);
+      transition: background var(--ease);
+    }
+    .stat-item:last-child { border-right: none; }
+    .stat-item:hover { background: rgba(255,106,0,0.04); }
+
+    .stat-icon {
+      flex-shrink: 0;
+      width: 46px;
+      height: 46px;
+      border-radius: var(--radius);
+      background: rgba(255,106,0,0.1);
+      border: 1px solid rgba(255,106,0,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .stat-icon svg {
+      width: 22px;
+      height: 22px;
+      fill: var(--orange);
+    }
+
+    .stat-text .stat-label {
+      font-family: var(--font-head);
+      font-size: 1.05rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--white);
+      line-height: 1.2;
+    }
+    .stat-text .stat-sub {
+      font-size: 0.75rem;
+      color: var(--grey);
+      margin-top: 3px;
+      line-height: 1.4;
+    }
+
+    /* ── Services ─────────────────────────────────────────── */
+    #services {
+      padding: 96px 0 104px;
+      background: var(--black);
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+    }
+
+    .service-card {
+      background: var(--steel);
+      border-radius: var(--radius);
+      padding: 34px 30px;
+      border: 1px solid rgba(255,255,255,0.04);
+      border-top: 2px solid var(--orange);
+      position: relative;
+      overflow: hidden;
+      transition: transform var(--ease), box-shadow var(--ease);
+      cursor: default;
+    }
+    .service-card::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(255,106,0,0.05) 0%, transparent 55%);
+      opacity: 0;
+      transition: opacity var(--ease);
+      pointer-events: none;
+    }
+    .service-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 18px 52px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,106,0,0.18);
+    }
+    .service-card:hover::after { opacity: 1; }
+
+    .service-icon {
+      width: 50px;
+      height: 50px;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255,106,0,0.08);
+      border-radius: var(--radius);
+      border: 1px solid rgba(255,106,0,0.18);
+      transition: background var(--ease), border-color var(--ease);
+    }
+    .service-card:hover .service-icon {
+      background: rgba(255,106,0,0.14);
+      border-color: rgba(255,106,0,0.35);
+    }
+    .service-icon svg {
+      width: 24px;
+      height: 24px;
+      stroke: var(--orange);
+      fill: none;
+      stroke-width: 1.8;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .service-title {
+      font-family: var(--font-head);
+      font-size: 1.2rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-bottom: 10px;
+      line-height: 1.1;
+    }
+
+    .service-desc {
+      font-size: 0.87rem;
+      color: var(--grey-mid);
+      line-height: 1.72;
+    }
+
+    .card-num {
+      position: absolute;
+      bottom: 14px;
+      right: 18px;
+      font-family: var(--font-head);
+      font-size: 3.8rem;
+      font-weight: 900;
+      color: rgba(255,255,255,0.025);
+      line-height: 1;
+      pointer-events: none;
+      transition: color var(--ease);
+    }
+    .service-card:hover .card-num { color: rgba(255,106,0,0.04); }
+
+    /* ── Industries ───────────────────────────────────────── */
+    #industries {
+      padding: 96px 0 104px;
+      background: var(--steel2);
+      border-top: 1px solid rgba(255,255,255,0.04);
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+
+    .industries-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+
+    .industry-tag {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 22px 24px;
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: var(--radius);
+      background: rgba(255,255,255,0.015);
+      font-family: var(--font-head);
+      font-size: 1.15rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      transition: border-color var(--ease), background var(--ease), transform var(--ease), box-shadow var(--ease);
+      cursor: default;
+    }
+    .industry-tag:hover {
+      border-color: rgba(255,106,0,0.5);
+      background: rgba(255,106,0,0.055);
+      transform: translateY(-3px);
+      box-shadow: 0 10px 28px rgba(0,0,0,0.35);
+    }
+    .industry-icon {
+      flex-shrink: 0;
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .industry-icon svg {
+      width: 26px;
+      height: 26px;
+      stroke: var(--orange);
+      fill: none;
+      stroke-width: 1.6;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    /* ── CTA Banner ───────────────────────────────────────── */
+    #cta-banner {
+      padding: 76px 0;
+      background: var(--orange);
+      position: relative;
+      overflow: hidden;
+    }
+    #cta-banner::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(0,0,0,0.07) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,0,0,0.07) 1px, transparent 1px);
+      background-size: 30px 30px;
+      pointer-events: none;
+    }
+    #cta-banner::after {
+      content: '';
+      position: absolute;
+      top: -80%;
+      right: -5%;
+      width: 560px;
+      height: 560px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.05);
+      pointer-events: none;
+    }
+
+    .cta-inner {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+
+    .cta-headline {
+      font-family: var(--font-head);
+      font-size: clamp(2rem, 4.2vw, 3rem);
+      font-weight: 900;
+      text-transform: uppercase;
+      line-height: 1.02;
+      color: var(--white);
+      margin-bottom: 8px;
+    }
+    .cta-sub {
+      font-size: 0.97rem;
+      color: rgba(255,255,255,0.82);
+    }
+
+    .btn-white {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--white);
+      color: var(--orange);
+      font-family: var(--font-head);
+      font-size: 1rem;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 17px 34px;
+      border-radius: var(--radius);
+      border: 2px solid var(--white);
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background var(--ease), transform var(--ease), box-shadow var(--ease);
+    }
+    .btn-white:hover {
+      background: rgba(255,255,255,0.92);
+      transform: translateY(-3px);
+      box-shadow: 0 12px 32px rgba(0,0,0,0.22);
+    }
+
+    /* ── Contact ──────────────────────────────────────────── */
+    #contact {
+      padding: 96px 0 104px;
+      background: var(--black);
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.45fr;
+      gap: 72px;
+      align-items: start;
+    }
+
+    .contact-info p {
+      color: var(--grey-mid);
+      font-size: 0.92rem;
+      line-height: 1.78;
+      margin-bottom: 36px;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      margin-bottom: 22px;
+    }
+    .contact-item-icon {
+      flex-shrink: 0;
+      width: 42px;
+      height: 42px;
+      background: rgba(255,106,0,0.08);
+      border: 1px solid rgba(255,106,0,0.2);
+      border-radius: var(--radius);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .contact-item-icon svg {
+      width: 19px;
+      height: 19px;
+      stroke: var(--orange);
+      fill: none;
+      stroke-width: 1.8;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    .contact-item-text strong {
+      display: block;
+      font-family: var(--font-head);
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--grey);
+      margin-bottom: 4px;
+    }
+    .contact-item-text a,
+    .contact-item-text span {
+      font-size: 0.97rem;
+      color: var(--white);
+      font-weight: 500;
+      transition: color var(--ease);
+    }
+    .contact-item-text a:hover { color: var(--orange); }
+
+    .avail-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 0.78rem;
+      color: var(--grey);
+      margin-top: 6px;
+    }
+    .avail-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #22c55e;
+      box-shadow: 0 0 0 3px rgba(34,197,94,0.18);
+      animation: pulse 2.2s infinite;
+      flex-shrink: 0;
+    }
+    @keyframes pulse {
+      0%, 100% { box-shadow: 0 0 0 3px rgba(34,197,94,0.18); }
+      50%       { box-shadow: 0 0 0 6px rgba(34,197,94,0.08); }
+    }
+
+    /* Form */
+    .contact-form {
+      background: var(--steel);
+      border: 1px solid rgba(255,255,255,0.05);
+      border-top: 2px solid var(--orange);
+      border-radius: var(--radius);
+      padding: 38px 36px;
+    }
+
+    .form-title {
+      font-family: var(--font-head);
+      font-size: 1.25rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      margin-bottom: 26px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      color: var(--white);
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .form-group { margin-bottom: 14px; }
+    .form-group label {
+      display: block;
+      font-family: var(--font-head);
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--grey);
+      margin-bottom: 7px;
+    }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      background: rgba(255,255,255,0.035);
+      border: 1px solid rgba(255,255,255,0.09);
+      border-radius: var(--radius);
+      color: var(--white);
+      font-family: var(--font-body);
+      font-size: 0.91rem;
+      padding: 11px 14px;
+      outline: none;
+      transition: border-color var(--ease), background var(--ease), box-shadow var(--ease);
+      -webkit-appearance: none;
+    }
+    .form-group input::placeholder,
+    .form-group textarea::placeholder { color: rgba(255,255,255,0.18); }
+    .form-group select { cursor: pointer; }
+    .form-group select option { background: #2A2A2A; color: var(--white); }
+    .form-group textarea { resize: vertical; min-height: 116px; }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--orange);
+      background: rgba(255,106,0,0.035);
+      box-shadow: 0 0 0 3px rgba(255,106,0,0.09);
+    }
+    .form-group input.error,
+    .form-group textarea.error { border-color: #ef4444; }
+
+    .form-submit {
+      width: 100%;
+      background: var(--orange);
+      color: var(--white);
+      font-family: var(--font-head);
+      font-size: 1rem;
+      font-weight: 800;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+      padding: 15px 28px;
+      border: none;
+      border-radius: var(--radius);
+      cursor: pointer;
+      margin-top: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      transition: background var(--ease), transform var(--ease), box-shadow var(--ease);
+    }
+    .form-submit:hover {
+      background: var(--orange2);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 26px rgba(255,106,0,0.38);
+    }
+    .form-submit svg {
+      width: 17px; height: 17px;
+      stroke: var(--white); fill: none;
+      stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+    }
+
+    .form-success {
+      display: none;
+      text-align: center;
+      padding: 40px 24px;
+    }
+    .form-success .success-icon {
+      width: 60px; height: 60px;
+      background: rgba(34,197,94,0.1);
+      border: 1px solid rgba(34,197,94,0.3);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 18px;
+    }
+    .form-success .success-icon svg {
+      width: 28px; height: 28px;
+      stroke: #22c55e; fill: none;
+      stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round;
+    }
+    .form-success h3 {
+      font-family: var(--font-head);
+      font-size: 1.6rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 8px;
+    }
+    .form-success p { color: var(--grey); font-size: 0.88rem; }
+
+    /* ── Footer ───────────────────────────────────────────── */
+    footer {
+      background: #080808;
+      border-top: 1px solid rgba(255,255,255,0.04);
+      padding: 28px 0;
+    }
+
+    .footer-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      flex-wrap: wrap;
+      padding-bottom: 22px;
+      margin-bottom: 22px;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+
+    .footer-logo {
+      font-family: var(--font-head);
+      font-size: 1.3rem;
+      font-weight: 900;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      line-height: 1;
+    }
+    .footer-logo em { color: var(--orange); font-style: normal; }
+    .footer-logo small {
+      display: block;
+      font-size: 0.48rem;
+      color: rgba(255,106,0,0.6);
+      letter-spacing: 0.2em;
+      margin-top: 2px;
+    }
+
+    .footer-nav {
+      display: flex;
+      gap: 26px;
+      flex-wrap: wrap;
+    }
+    .footer-nav a {
+      font-family: var(--font-head);
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #555;
+      transition: color var(--ease);
+    }
+    .footer-nav a:hover { color: var(--orange); }
+
+    .footer-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .footer-copy {
+      font-size: 0.74rem;
+      color: #444;
+    }
+
+    .footer-contact-links {
+      display: flex;
+      gap: 20px;
+    }
+    .footer-contact-links a {
+      font-size: 0.74rem;
+      color: #555;
+      transition: color var(--ease);
+    }
+    .footer-contact-links a:hover { color: var(--orange); }
+
+    /* ── Responsive ───────────────────────────────────────── */
+    @media (max-width: 1024px) {
+      .contact-grid { gap: 48px; }
+    }
+
+    @media (max-width: 860px) {
+      .services-grid { grid-template-columns: 1fr; }
+      .industries-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+
+      .hero-title { font-size: clamp(2.8rem, 10vw, 4.2rem); }
+      .hero-sub { font-size: 1rem; }
+      .hero-content { padding: 40px 0 60px; }
+
+      .stats-grid { grid-template-columns: 1fr; }
+      .stat-item {
+        border-right: none;
+        border-bottom: 1px solid rgba(255,255,255,0.06);
+        padding: 20px 20px;
+      }
+      .stat-item:last-child { border-bottom: none; }
+
+      .contact-grid { grid-template-columns: 1fr; gap: 44px; }
+      .form-row { grid-template-columns: 1fr; }
+      .contact-form { padding: 26px 20px; }
+
+      .cta-inner { flex-direction: column; text-align: center; }
+
+      .footer-top { flex-direction: column; align-items: center; text-align: center; }
+      .footer-bottom { flex-direction: column; align-items: center; text-align: center; }
+      .footer-nav { justify-content: center; }
+    }
+
+    @media (max-width: 520px) {
+      .industries-grid { grid-template-columns: 1fr; }
+      .hero-actions { flex-direction: column; }
+      .btn-primary, .btn-ghost { width: 100%; justify-content: center; }
+    }
+
+    /* ── Utility ──────────────────────────────────────────── */
+    .orange { color: var(--orange); }
+    .sr-only {
+      position: absolute; width: 1px; height: 1px;
+      overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav id="navbar" role="navigation" aria-label="Main navigation">
+    <div class="container">
+      <div class="nav-inner">
+        <a href="#hero" class="nav-logo" aria-label="MechArc Industrial LLC">
+          <span class="logo-main">Mech<em>Arc</em></span>
+          <span class="logo-sub">Industrial LLC</span>
+        </a>
+
+        <ul class="nav-links" role="list">
+          <li><a href="#services">Services</a></li>
+          <li><a href="#industries">Industries</a></li>
+          <li><a href="#contact">Contact</a></li>
+          <li><a href="#contact" class="nav-cta">Get a Quote</a></li>
+        </ul>
+
+        <button class="hamburger" id="hamburger" aria-label="Toggle navigation" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- MOBILE MENU -->
+  <div class="mobile-menu" id="mobileMenu" role="dialog" aria-label="Mobile navigation">
+    <a href="#services"   class="mob-link">Services</a>
+    <a href="#industries" class="mob-link">Industries</a>
+    <a href="#contact"    class="mob-link">Contact</a>
+    <a href="#contact"    class="nav-cta mob-link">Get a Quote</a>
+  </div>
+
+
+  <!-- HERO -->
+  <section id="hero" aria-label="Hero">
+    <div class="hero-grid" aria-hidden="true"></div>
+    <div id="particles" aria-hidden="true"></div>
+
+    <div class="container">
+      <div class="hero-content">
+        <div class="hero-eyebrow fade-up">Industrial Repair &amp; Manufacturing</div>
+
+        <h1 class="hero-title fade-up" style="transition-delay:0.1s">
+          Built for the<br />
+          <span class="accent">Demands</span><br />
+          <span class="dim">of Industry.</span>
+        </h1>
+
+        <p class="hero-sub fade-up" style="transition-delay:0.2s">
+          Industrial repair and custom manufacturing solutions delivered with precision, speed, and reliability. When your operation can't afford downtime — MechArc delivers.
+        </p>
+
+        <div class="hero-actions fade-up" style="transition-delay:0.3s">
+          <a href="#contact" class="btn-primary">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.63 1.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.79a16 16 0 0 0 6.29 6.29l.98-.89a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7a2 2 0 0 1 1.72 2.08z"/></svg>
+            Request a Quote
+          </a>
+          <a href="#services" class="btn-ghost">
+            Our Services
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="scroll-cue" aria-hidden="true">
+      <span>Scroll</span>
+      <div class="scroll-mouse"></div>
+    </div>
+  </section>
+
+
+  <!-- STATS BAR -->
+  <section id="stats" aria-label="Key capabilities">
+    <div class="container">
+      <div class="stats-grid">
+
+        <div class="stat-item fade-up">
+          <div class="stat-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+          </div>
+          <div class="stat-text">
+            <div class="stat-label">Industrial Repair</div>
+            <div class="stat-sub">Full-scope equipment diagnostics &amp; restoration</div>
+          </div>
+        </div>
+
+        <div class="stat-item fade-up" style="transition-delay:0.1s">
+          <div class="stat-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+          </div>
+          <div class="stat-text">
+            <div class="stat-label">Custom Manufacturing</div>
+            <div class="stat-sub">Precision fabrication built to your exact spec</div>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- SERVICES -->
+  <section id="services" aria-labelledby="services-title">
+    <div class="container">
+      <div class="eyebrow fade-up">Our Capabilities</div>
+      <h2 class="section-title fade-up" id="services-title">What We Do</h2>
+      <p class="section-sub fade-up">
+        From emergency field repairs to precision custom fabrication — MechArc brings expert, hands-on capability to every job, every time.
+      </p>
+
+      <div class="services-grid">
+
+        <div class="service-card fade-up" style="transition-delay:0.05s">
+          <div class="service-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+          </div>
+          <div class="service-body">
+            <h3 class="service-title">Industrial Equipment Repair</h3>
+            <p class="service-desc">Comprehensive diagnosis and repair of industrial machinery, hydraulic systems, drive components, and mechanical assemblies. We restore full functionality — fast.</p>
+          </div>
+          <span class="card-num" aria-hidden="true">01</span>
+        </div>
+
+        <div class="service-card fade-up" style="transition-delay:0.1s">
+          <div class="service-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><line x1="6" y1="3" x2="6" y2="15"/><circle cx="18" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M18 9a9 9 0 0 1-9 9"/></svg>
+          </div>
+          <div class="service-body">
+            <h3 class="service-title">Custom Manufacturing &amp; Fabrication</h3>
+            <p class="service-desc">We design and fabricate custom parts, brackets, frames, and assemblies to exact tolerances. If it needs to be built from scratch, we can build it right.</p>
+          </div>
+          <span class="card-num" aria-hidden="true">02</span>
+        </div>
+
+        <div class="service-card fade-up" style="transition-delay:0.15s">
+          <div class="service-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/></svg>
+          </div>
+          <div class="service-body">
+            <h3 class="service-title">Mechanical Services</h3>
+            <p class="service-desc">Bearings, shafts, gearboxes, couplings, and drive systems — we handle the mechanical core of your operation with precision and care.</p>
+          </div>
+          <span class="card-num" aria-hidden="true">03</span>
+        </div>
+
+        <div class="service-card fade-up" style="transition-delay:0.2s">
+          <div class="service-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+          </div>
+          <div class="service-body">
+            <h3 class="service-title">Parts &amp; Components</h3>
+            <p class="service-desc">Sourcing and supply of hard-to-find industrial parts, OEM replacements, and custom-machined components — so the right part is never the bottleneck.</p>
+          </div>
+          <span class="card-num" aria-hidden="true">04</span>
+        </div>
+
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- INDUSTRIES -->
+  <section id="industries" aria-labelledby="industries-title">
+    <div class="container">
+      <div class="eyebrow fade-up">Sectors We Serve</div>
+      <h2 class="section-title fade-up" id="industries-title">Industries We Serve</h2>
+      <p class="section-sub fade-up">
+        MechArc brings focused expertise across the sectors that keep the economy moving. Whatever your field, we have the skills to support your operation.
+      </p>
+
+      <div class="industries-grid">
+
+        <div class="industry-tag fade-up" style="transition-delay:0.05s">
+          <div class="industry-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+          </div>
+          Manufacturing
+        </div>
+
+        <div class="industry-tag fade-up" style="transition-delay:0.1s">
+          <div class="industry-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><polygon points="1 22 23 22 12 2 1 22"/><line x1="12" y1="10" x2="12" y2="14"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+          </div>
+          Construction
+        </div>
+
+        <div class="industry-tag fade-up" style="transition-delay:0.15s">
+          <div class="industry-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg>
+          </div>
+          Oil &amp; Gas
+        </div>
+
+        <div class="industry-tag fade-up" style="transition-delay:0.2s">
+          <div class="industry-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          </div>
+          Agriculture
+        </div>
+
+        <div class="industry-tag fade-up" style="transition-delay:0.25s">
+          <div class="industry-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+          </div>
+          Warehousing
+        </div>
+
+        <div class="industry-tag fade-up" style="transition-delay:0.3s">
+          <div class="industry-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+          </div>
+          Heavy Equipment
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- CTA BANNER -->
+  <section id="cta-banner" aria-label="Call to action">
+    <div class="container">
+      <div class="cta-inner fade-up">
+        <div>
+          <h2 class="cta-headline">Have a job that needs doing?<br />Let's talk.</h2>
+          <p class="cta-sub">We respond fast. Calls, texts, and emails are all welcome.</p>
+        </div>
+        <a href="#contact" class="btn-white">
+          Contact Us
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- CONTACT -->
+  <section id="contact" aria-labelledby="contact-title">
+    <div class="container">
+      <div class="eyebrow fade-up">Reach Out</div>
+      <h2 class="section-title fade-up" id="contact-title">Get In Touch</h2>
+
+      <div class="contact-grid">
+
+        <div class="contact-info fade-left">
+          <p>
+            Ready to discuss your project? Whether it's an urgent repair or a custom build, we're here to help. Reach out directly or use the form — we respond quickly.
+          </p>
+
+          <div class="contact-item">
+            <div class="contact-item-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.63 1.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.79a16 16 0 0 0 6.29 6.29l.98-.89a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7a2 2 0 0 1 1.72 2.08z"/></svg>
+            </div>
+            <div class="contact-item-text">
+              <strong>Phone / Text</strong>
+              <a href="tel:+16095789849">(609) 578-9849</a>
+              <div class="avail-badge">
+                <span class="avail-dot"></span>
+                Available for calls and texts
+              </div>
+            </div>
+          </div>
+
+          <div class="contact-item">
+            <div class="contact-item-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            </div>
+            <div class="contact-item-text">
+              <strong>Email</strong>
+              <a href="mailto:mecharc.llc@gmail.com">mecharc.llc@gmail.com</a>
+            </div>
+          </div>
+
+          <div class="contact-item">
+            <div class="contact-item-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            </div>
+            <div class="contact-item-text">
+              <strong>Service Area</strong>
+              <span>New Jersey &amp; surrounding regions</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="contact-form fade-right" role="region" aria-label="Contact form">
+          <div class="form-title">Send Us a Message</div>
+
+          <div id="formSuccess" class="form-success" aria-live="polite">
+            <div class="success-icon">
+              <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <h3>Message Sent!</h3>
+            <p>Thanks for reaching out. We'll get back to you as soon as possible.</p>
+          </div>
+
+          <form id="contactForm" novalidate>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="fname">Name <span class="sr-only">(required)</span></label>
+                <input type="text" id="fname" name="name" placeholder="John Smith" required autocomplete="name" />
+              </div>
+              <div class="form-group">
+                <label for="fphone">Phone</label>
+                <input type="tel" id="fphone" name="phone" placeholder="(609) 000-0000" autocomplete="tel" />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="femail">Email <span class="sr-only">(required)</span></label>
+              <input type="email" id="femail" name="email" placeholder="you@company.com" required autocomplete="email" />
+            </div>
+
+            <div class="form-group">
+              <label for="fservice">Type of Service</label>
+              <select id="fservice" name="service">
+                <option value="" disabled selected>Select a service...</option>
+                <option value="equipment-repair">Industrial Equipment Repair</option>
+                <option value="custom-manufacturing">Custom Manufacturing &amp; Fabrication</option>
+                <option value="mechanical">Mechanical Services</option>
+                <option value="parts">Parts &amp; Components</option>
+                <option value="other">Other / Not Sure</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="fmessage">Message <span class="sr-only">(required)</span></label>
+              <textarea id="fmessage" name="message" placeholder="Describe your project or repair need..." required></textarea>
+            </div>
+
+            <button type="submit" class="form-submit">
+              Send Message
+              <svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+            </button>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- FOOTER -->
+  <footer role="contentinfo">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-logo">
+          Mech<em>Arc</em>
+          <small>Industrial LLC</small>
+        </div>
+        <nav class="footer-nav" aria-label="Footer navigation">
+          <a href="#services">Services</a>
+          <a href="#industries">Industries</a>
+          <a href="#contact">Contact</a>
+        </nav>
+      </div>
+      <div class="footer-bottom">
+        <span class="footer-copy">&copy; 2025 MechArc Industrial LLC. All rights reserved.</span>
+        <div class="footer-contact-links">
+          <a href="tel:+16095789849">(609) 578-9849</a>
+          <a href="mailto:mecharc.llc@gmail.com">mecharc.llc@gmail.com</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+
+  <script>
+    // Particles
+    (function () {
+      const c = document.getElementById('particles');
+      if (!c) return;
+      c.style.cssText = 'position:absolute;inset:0;pointer-events:none;overflow:hidden;';
+      for (let i = 0; i < 20; i++) {
+        const p = document.createElement('div');
+        const sz = Math.random() * 2.5 + 1;
+        p.className = 'particle';
+        p.style.cssText = `width:${sz}px;height:${sz}px;left:${Math.random()*100}%;top:${38+Math.random()*55}%;--dur:${7+Math.random()*9}s;--delay:${Math.random()*7}s;`;
+        c.appendChild(p);
+      }
+    })();
+
+    // Navbar scroll + active link
+    const navbar   = document.getElementById('navbar');
+    const navAnchors = document.querySelectorAll('.nav-links a:not(.nav-cta)');
+    const sections   = document.querySelectorAll('section[id]');
+
+    function updateNav() {
+      navbar.classList.toggle('scrolled', window.scrollY > 50);
+      let cur = '';
+      sections.forEach(s => { if (window.scrollY >= s.offsetTop - 110) cur = s.id; });
+      navAnchors.forEach(a => a.classList.toggle('active', a.getAttribute('href') === `#${cur}`));
+    }
+    window.addEventListener('scroll', updateNav, { passive: true });
+    updateNav();
+
+    // Hamburger
+    const ham  = document.getElementById('hamburger');
+    const mob  = document.getElementById('mobileMenu');
+    const mobs = document.querySelectorAll('.mob-link');
+
+    function closeMob() {
+      ham.classList.remove('open');
+      mob.classList.remove('open');
+      ham.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+    }
+    ham.addEventListener('click', () => {
+      const open = ham.classList.toggle('open');
+      mob.classList.toggle('open', open);
+      ham.setAttribute('aria-expanded', String(open));
+      document.body.style.overflow = open ? 'hidden' : '';
+    });
+    mobs.forEach(l => l.addEventListener('click', closeMob));
+
+    // Intersection observer
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }});
+    }, { threshold: 0.1, rootMargin: '0px 0px -36px 0px' });
+
+    document.querySelectorAll('.fade-up, .fade-left, .fade-right').forEach(el => io.observe(el));
+
+    // Immediately reveal hero elements
+    document.querySelectorAll('#hero .fade-up').forEach(el => {
+      const delay = parseFloat(el.style.transitionDelay || '0') * 1000;
+      setTimeout(() => el.classList.add('visible'), 80 + delay);
+    });
+
+    // Smooth scroll with nav offset
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', function(e) {
+        const t = document.querySelector(this.getAttribute('href'));
+        if (!t) return;
+        e.preventDefault();
+        window.scrollTo({ top: t.getBoundingClientRect().top + window.scrollY - 70, behavior: 'smooth' });
+      });
+    });
+
+    // Contact form
+    const form    = document.getElementById('contactForm');
+    const success = document.getElementById('formSuccess');
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const name  = document.getElementById('fname');
+      const email = document.getElementById('femail');
+      const msg   = document.getElementById('fmessage');
+      let ok = true;
+
+      [name, email, msg].forEach(el => {
+        el.classList.remove('error');
+        if (!el.value.trim()) {
+          el.classList.add('error');
+          el.addEventListener('input', () => el.classList.remove('error'), { once: true });
+          ok = false;
+        }
+      });
+      if (!ok) return;
+
+      const svc   = document.getElementById('fservice').value;
+      const phone = document.getElementById('fphone').value.trim();
+      const subj  = encodeURIComponent(`MechArc Inquiry — ${svc || 'General'}`);
+      const body  = encodeURIComponent(`Name: ${name.value.trim()}\nPhone: ${phone || 'N/A'}\nEmail: ${email.value.trim()}\nService: ${svc || 'N/A'}\n\nMessage:\n${msg.value.trim()}`);
+
+      window.location.href = `mailto:mecharc.llc@gmail.com?subject=${subj}&body=${body}`;
+      form.style.display = 'none';
+      success.style.display = 'block';
+    });
+  </script>
+
+</body>
+</html>
