@@ -1413,7 +1413,7 @@
             <p>Thanks for reaching out. We'll get back to you as soon as possible.</p>
           </div>
 
-          <form id="contactForm" novalidate>
+          <form id="contactForm" action="https://formspree.io/f/xaqzrbya" method="POST" novalidate>
             <div class="form-row">
               <div class="form-group">
                 <label for="fname">Name <span class="sr-only">(required)</span></label>
@@ -1559,7 +1559,7 @@
     const form    = document.getElementById('contactForm');
     const success = document.getElementById('formSuccess');
 
-    form.addEventListener('submit', function(e) {
+    form.addEventListener('submit', async function(e) {
       e.preventDefault();
       const name  = document.getElementById('fname');
       const email = document.getElementById('femail');
@@ -1576,14 +1576,38 @@
       });
       if (!ok) return;
 
-      const svc   = document.getElementById('fservice').value;
-      const phone = document.getElementById('fphone').value.trim();
-      const subj  = encodeURIComponent(`MechArc Inquiry — ${svc || 'General'}`);
-      const body  = encodeURIComponent(`Name: ${name.value.trim()}\nPhone: ${phone || 'N/A'}\nEmail: ${email.value.trim()}\nService: ${svc || 'N/A'}\n\nMessage:\n${msg.value.trim()}`);
+      const svc    = document.getElementById('fservice').value;
+      const phone  = document.getElementById('fphone').value.trim();
+      const btn    = form.querySelector('.form-submit');
+      btn.disabled = true;
+      btn.textContent = 'Sending…';
 
-      window.location.href = `mailto:mecharc.llc@gmail.com?subject=${subj}&body=${body}`;
-      form.style.display = 'none';
-      success.style.display = 'block';
+      try {
+        const res = await fetch('https://formspree.io/f/xaqzrbya', {
+          method: 'POST',
+          headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            name:    name.value.trim(),
+            email:   email.value.trim(),
+            phone:   phone || 'N/A',
+            service: svc   || 'General',
+            message: msg.value.trim()
+          })
+        });
+        if (res.ok) {
+          form.style.display = 'none';
+          success.style.display = 'block';
+        } else {
+          const data = await res.json();
+          alert((data.errors || []).map(e => e.message).join('\n') || 'Submission failed. Please try again.');
+          btn.disabled = false;
+          btn.innerHTML = 'Send Message <svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>';
+        }
+      } catch {
+        alert('Network error. Please check your connection and try again.');
+        btn.disabled = false;
+        btn.innerHTML = 'Send Message <svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>';
+      }
     });
   </script>
 
